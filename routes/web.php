@@ -1,8 +1,5 @@
 <?php
 
-namespace App;
-
-use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,7 +12,6 @@ use App\User;
 */
 
 $router->get('/', function () use ($router) {
-    // return $router->app->version();
     return str_random(32);
 });
 
@@ -31,11 +27,35 @@ $router->group(
     }
 );
 
+$router->group(['middleware' => 'jwt_auth'], function() use ($router) {
+    $router->get('users', function() {
+        $users = \App\User::all();
+        return response()->json($users);
+    });
+});
+
 // Accepts credentials and return a token for us
 $router->post(
     'auth/login', 
     [
        'uses' => 'AuthController@authenticate'
     ]
+);
+
+$router->group(
+    [
+        'prefix' => '/restuarant'
+    ], function ($router) {
+        $router->get('/', 'RestuarantController@index');
+        $router->post('/', 'RestuarantController@store');
+        $router->get('/{id}', 'RestuarantController@show');
+        $router->put('/{id}', 'RestuarantController@update');
+        $router->delete('/{id}', 'RestuarantController@delete');
+    }
+);
+
+$router->post(
+    'restuarants/{restuarant}/reviews', 
+    'ReviewController@store'
 );
 
