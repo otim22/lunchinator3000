@@ -99,4 +99,16 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+$app->withFacades();
+$app->withEloquent();
+
+// Register our JwtMiddleware and alias it with jwt.auth
+$app->routeMiddleware([
+    'jwt_auth' => App\Http\Middleware\JwtMiddleware::class,
+]);
+// $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+// $app->routeMiddleware([
+//     'auth' => App\Http\Middleware\Authenticate::class,
+// ]);
+
 return $app;

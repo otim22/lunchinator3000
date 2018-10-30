@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,8 +15,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
-    // return str_random(32);
+    // return $router->app->version();
+    return str_random(32);
 });
 
 $router->group(
@@ -27,3 +30,12 @@ $router->group(
         $router->delete('/{id}', 'UserController@delete');
     }
 );
+
+// Accepts credentials and return a token for us
+$router->post(
+    'auth/login', 
+    [
+       'uses' => 'AuthController@authenticate'
+    ]
+);
+

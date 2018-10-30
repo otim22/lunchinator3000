@@ -1,5 +1,6 @@
 <?php
 
+namespace App;
 namespace App\Providers;
 
 use App\User;
@@ -9,13 +10,13 @@ use Illuminate\Support\ServiceProvider;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register JWTAuth.
      *
      * @return void
      */
     public function register()
     {
-        //
+        $this->app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
     }
 
     /**
