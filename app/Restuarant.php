@@ -2,14 +2,15 @@
 
 namespace App;
 
-use App\Restuarant;
+use App\User;
+use App\Review;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class Restuarant extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -19,19 +20,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'user_id', 'wait_time_minutes', 'type', 'image', 'description'
     ];
 
-    public function restuarant()
+    public function user()
     {
-        return $this->hasMany(Restuarant::class);
+        return $this->belongsTo(User::class());
     }
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'created_at', 'updated_at'
-    ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }
