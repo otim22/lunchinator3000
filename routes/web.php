@@ -15,23 +15,20 @@ $router->get('/', function () use ($router) {
     return str_random(32);
 });
 
-$router->group(
-    [
-        'prefix' => '/users'
-    ], function ($router) {
-        $router->get('/', 'UserController@index');
-        $router->post('/', 'UserController@store');
-        $router->get('/{id}', 'UserController@show');
-        $router->put('/{id}', 'UserController@update');
-        $router->delete('/{id}', 'UserController@delete');
-    }
-);
 
 $router->group(['middleware' => 'jwt_auth'], function() use ($router) {
-    $router->get('users', function() {
-        $users = \App\User::all();
-        return response()->json($users);
-    });
+
+    $router->group(
+        [
+            'prefix' => '/users'
+        ], function ($router) {
+            $router->get('/', 'UserController@index');
+            $router->post('/', 'UserController@store');
+            $router->get('/{id}', 'UserController@show');
+            $router->put('/{id}', 'UserController@update');
+            $router->delete('/{id}', 'UserController@delete');
+        }
+    );
 });
 
 // Accepts credentials and return a token for us
