@@ -16,6 +16,7 @@ class CreateRestuarantsTable extends Migration
         Schema::create('restuarants', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->string('name');
             $table->integer('wait_time_minutes');
             $table->string('type');
             $table->string('image');

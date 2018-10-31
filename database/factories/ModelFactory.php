@@ -18,3 +18,4 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => app('hash')->make('secret'),
     ];
 });
+

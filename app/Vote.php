@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Restuarant;
+use App\Ballot;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model 
+class Vote extends Model 
 {
     /**
      * The attributes that are mass assignable.
@@ -15,12 +15,13 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'restuarant_id', 'restaurant', 'reviewer', 'rating', 'review', 'reviewerImage'
+        'restuarant_id', 'user_id', 'vote'
     ];
 
-    public function restuarant()
+
+    public function ballot()
     {
-        return $this->belongsTo(Restuarant::class);
+        return $this->hasMany(Ballot::class);
     }
 
 }

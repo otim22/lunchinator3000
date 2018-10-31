@@ -19,17 +19,13 @@
     "autoload": {
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "tests/",
+            "database/"
         ],
         "psr-4": {
             "App\\": "app/"
         }
-    },
-    "autoload-dev": {
-        "classmap": [
-            "tests/",
-            "database/"
-        ]
     },
     "scripts": {
         "post-root-package-install": [

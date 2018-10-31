@@ -11,10 +11,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return str_random(32);
-});
-
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     
     // Accepts credentials and return a token for us
@@ -22,13 +18,13 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     $router->group(['middleware' => 'jwt_auth'], function () use ($router) {
 
-        $router->get('/users/{id}', 'UserController@show');
         $router->get('/users', 'UserController@index');
         $router->post('/users', 'UserController@store');
+        $router->get('/users/{id}', 'UserController@show');
 
-        $router->get('/restuarant/{id}', 'RestuarantController@show');
         $router->get('/restuarant', 'RestuarantController@index');
         $router->post('/restuarant', 'RestuarantController@store');
+        $router->get('/restuarant/{id}', 'RestuarantController@show');
 
         $router->post('restuarants/{restuarant}/reviews', 'ReviewController@store');
     });
