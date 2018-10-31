@@ -15,15 +15,17 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function store()
+    protected function store(Resquest $request)
     {
         $review = Review::firstOrCreate(
             [
               'user_id' => $request->user()->id,
-              'restuarant_id' => $resturant->id,
-            ],
-            [
-                'rating' => $request->rating
+              'restuarant_id' => $resturant->id,                
+              'restaurant' => $resturant->restaurant,                
+              'reviewer' => $resturant->reviewer,                
+              'rating' => $request->rating,
+              'review' => $request->review,
+              'reviewerImage' => $request->reviewerImage
             ]
         );
 

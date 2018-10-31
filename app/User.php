@@ -23,9 +23,14 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name', 'email',
     ];
 
+    /**
+     * A user belongsToMany restuarants
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function restuarant()
     {
-        return $this->hasMany(Restuarant::class);
+        return $this->belongsToMany(Restuarant::class);
     }
 
     /**

@@ -20,7 +20,9 @@ class UserTest extends ApiTestHelper
      */
     public function testCanGetAllUsers()
     {
-        $this->json('GET', '/users')->seeStatusCode(200);
+        $response = $this->json('GET', 'api/v1/users');
+        
+        $response->assertStatus(200);
     }
 
     /**

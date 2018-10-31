@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Review;
 use App\Restuarant;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,7 @@ class RestuarantController extends Controller
     {
         $restaurant = Restuarant::create([
             'user_id' => $request->user()->id,
+            'name' => $request->name,
             'wait_time_minutes' => $request->wait_time_minutes,
             'type' => $request->type,
             'image' => $request->image,

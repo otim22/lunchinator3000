@@ -19,11 +19,21 @@ class Restuarant extends Model
         'user_id', 'name', 'wait_time_minutes', 'type', 'image', 'description'
     ];
 
+    /**
+     * A restuarant belongsToMany users
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function user()
     {
-        return $this->belongsTo(User::class());
+        return $this->belongsToMany(User::class);
     }
 
+    /**
+     * A restuarant can have many reviews
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function reviews()
     {
         return $this->hasMany(Review::class);

@@ -23,10 +23,16 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('/users/{id}', 'UserController@show');
 
         $router->get('/restuarant', 'RestuarantController@index');
-        $router->post('/restuarant', 'RestuarantController@store');
         $router->get('/restuarant/{id}', 'RestuarantController@show');
-
         $router->post('restuarants/{restuarant}/reviews', 'ReviewController@store');
+
+        $router->get('/ballot', 'BallotController@index');
+        $router->post('/ballot', 'BallotController@show');
+        $router->get('/ballot/{id}', 'BallotController@show');
+
+        $router->post('/vote', 'VoteController@show');
+
+        
     });
 
 });
