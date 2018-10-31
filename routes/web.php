@@ -15,44 +15,27 @@ $router->get('/', function () use ($router) {
     return str_random(32);
 });
 
+$router->group(['prefix' => 'api/v1'], function () use ($router) {
+    
+    // Accepts credentials and return a token for us
+    $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
 
-$router->group(['middleware' => 'jwt_auth'], function() use ($router) {
+    $router->group(['middleware' => 'jwt_auth'], function () use ($router) {
 
-    $router->group(
-        [
-            'prefix' => '/users'
-        ], function ($router) {
-            $router->get('/', 'UserController@index');
-            $router->post('/', 'UserController@store');
-            $router->get('/{id}', 'UserController@show');
-            $router->put('/{id}', 'UserController@update');
-            $router->delete('/{id}', 'UserController@delete');
-        }
-    );
+        $router->get('/users/{id}', 'UserController@show');
+        $router->get('/users', 'UserController@index');
+        $router->post('/users', 'UserController@store');
+
+        $router->get('/restuarant/{id}', 'RestuarantController@show');
+        $router->get('/restuarant', 'RestuarantController@index');
+        $router->post('/restuarant', 'RestuarantController@store');
+
+        $router->post('restuarants/{restuarant}/reviews', 'ReviewController@store');
+    });
+
 });
 
-// Accepts credentials and return a token for us
-$router->post(
-    'auth/login', 
-    [
-       'uses' => 'AuthController@authenticate'
-    ]
-);
 
-$router->group(
-    [
-        'prefix' => '/restuarant'
-    ], function ($router) {
-        $router->get('/', 'RestuarantController@index');
-        $router->post('/', 'RestuarantController@store');
-        $router->get('/{id}', 'RestuarantController@show');
-        $router->put('/{id}', 'RestuarantController@update');
-        $router->delete('/{id}', 'RestuarantController@delete');
-    }
-);
 
-$router->post(
-    'restuarants/{restuarant}/reviews', 
-    'ReviewController@store'
-);
+
 

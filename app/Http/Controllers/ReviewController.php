@@ -7,15 +7,6 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    /**
-     * Get all reviewId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        return response(['data', Review::all()->toArray()]);
-    }
 
     /**
      * Create a new review resource.
@@ -26,43 +17,17 @@ class ReviewController extends Controller
      */
     protected function store()
     {
-        
+        $review = Review::firstOrCreate(
+            [
+              'user_id' => $request->user()->id,
+              'restuarant_id' => $resturant->id,
+            ],
+            [
+                'rating' => $request->rating
+            ]
+        );
+
+        return response()->json($review, 201);
     }
 
-    /**
-     * Get one reviewId from the database
-     *
-     * @param int $reviewId reviewId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function show()
-    {
-        
-    }
-
-    /**
-     * Implement a full/partial update
-     *
-     * @param Request $request request
-     * @param int     $reviewId  reviewId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function update()
-    {
-        
-    }
-
-    /**
-     * Delete review resource
-     *
-     * @param int $reviewId reviewId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function delete()
-    {
-        
-    }
 }

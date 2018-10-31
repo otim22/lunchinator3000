@@ -3,8 +3,8 @@
 namespace App;
 namespace App\Http\Controllers;
 
-use Validator;
 use App\User;
+use Validator;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Firebase\JWT\ExpiredException;

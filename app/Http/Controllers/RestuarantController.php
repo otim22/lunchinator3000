@@ -8,61 +8,48 @@ use Illuminate\Http\Request;
 class RestuarantController extends Controller
 {
     /**
-     * Get all restuarantController
+     * Get all restuarant
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return response(['data', RestuarantController::all()->toArray()]);
+        $resturants = fetch('https://interview-project-17987.herokuapp.com/api/restaurants');
+
+        // return response(['data', Restuarant::all()->toArray()]);
+        return response(['data', $restaurants]);
     }
 
     /**
-     * Create a new RestuarantController resource.
+     * Create a new Restuarant resource.
      *
      * @param Request $request request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function store()
+    protected function store(Request $request)
     {
-        
+        $restaurant = Restuarant::create([
+            'user_id' => $request->user()->id,
+            'wait_time_minutes' => $request->wait_time_minutes,
+            'type' => $request->type,
+            'image' => $request->image,
+            'description' => $request->description,
+        ]);
+
+        return response()->json($restaurant, 201);
     }
 
     /**
-     * Get one RestuarantController from the database
+     * Get one Restuarant
      *
-     * @param int $restuarantControllerId restuarantControllerId
+     * @param int $restuarantId restuarantId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function show()
+    protected function show(Restuarant $restaurant)
     {
-        
+        return response()->json($restaurant);
     }
 
-    /**
-     * Implement a full/partial update
-     *
-     * @param Request $request request
-     * @param int     $userId  userId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function update()
-    {
-        
-    }
-
-    /**
-     * Delete a resource
-     *
-     * @param int $reviewId reviewId
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function delete()
-    {
-        
-    }
 }
