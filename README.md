@@ -1,5 +1,6 @@
 # Lunchinator3000
 A software application that answers the question “Where to for lunch?”
+Lunchinator3000 chooses a list of suggested restaurants from lunch group’s restaurant list, collects and tallies the votes, and then decides where you are go and to eat
 
 ## Project set up 
 Assuming you have docker installed and running 
@@ -44,8 +45,25 @@ Seed test data
 
 Creates test data. Default 100 records.
     
+    $ php artisan migrate
+    
     $ php artisan db:seed
 
+## Acces our routes
+
+Now lets access our data on the terminal
+
+Using information of the seeded data into the database
+
+    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/v1/auth/login
+
+    $ curl -X GET http://localhost:8000/api/v1/users
+
+Using the token provided
+    
+    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/v1/auth/login
+
+    $ curl -X GET 'http://localhost:8000/api/v1/users?token=tokenFromFirstRequest'
 
 ## Run Unit Tests
 
