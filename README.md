@@ -71,6 +71,8 @@ Execute into the api container
     
     $ docker exec -i -t app_workspace_1 /bin/bash
 
+    $ composer install
+
 Then run phpunit command
 
     $ vendor/bin/phpunit
