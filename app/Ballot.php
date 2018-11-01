@@ -15,7 +15,7 @@ class Ballot extends Model
      * @var array
      */
     protected $fillable = [
-        'ballot_id', 'endTime'
+        'ballot_id', 'endTime', 'updated_at', 'created_at'
     ];
 
     /**

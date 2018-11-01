@@ -16,7 +16,7 @@ class Vote extends Model
      * @var array
      */
     protected $fillable = [
-        'ballot_id', 'restuarant_id', 'email'
+        'ballot_id', 'restuarant_id', 'email', 'updated_at', 'created_at'
     ];
 
     /**

@@ -35,15 +35,15 @@ class BallotController extends Controller
     {
         $data = $request->all();
         $ballotId = $this->generateBallotId();
-        $endTime = Carbon::createFromFormat('d/mm/yy', $data['endTime']);
-        $ballot = DB::table('ballot')->insertGetId([
+        $endTime = Carbon::createFromFormat('d/m/Y h:m', $data['endTime']);
+        $ballot = DB::table('ballots')->insertGetId([
             'ballot_id' => $ballotId,
             'end_time' => $endTime
         ]);
 
         DB::table('voters')->insert($this->mapVoters($data['voters']));
 
-        return response()->json($ballotId, 201);
+        return response()->json(['ballotId' => $ballotId], 200);
     }
 
     /**
@@ -72,12 +72,13 @@ class BallotController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function mapVoters($voters) {
+    protected function mapVoters($voters)
+    {
         return collect($voters)->map(function($item, $key) {
             return [
                 'name' => $item['name'],
                 'email' => $item['emailAddress']
-            ]
+            ];
         })->all();
     }
 }
