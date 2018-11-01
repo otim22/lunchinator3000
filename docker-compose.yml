@@ -8,9 +8,10 @@ services:
         volumes:
             - ./:/var/www
         ports:
-            - "8080:80"
+            - "80:80"
         links:
             - app
+            - database
             
     app:
         build:
@@ -20,9 +21,6 @@ services:
             - ./:/var/www
         links:
             - database
-        environment:
-            - "DB_PORT=3306"
-            - "DB_HOST=database"
 
     database:
         image: mariadb:latest
@@ -31,7 +29,9 @@ services:
             - ./mysql:/var/lib/mysql
         restart: always
         environment:
-            - "MYSQL_ROOT_PASSWORD=lunch"
-            - "MYSQL_DATABASE=lunchinator"
+            - MYSQL_ROOT_PASSWORD=lunch
+            - MYSQL_PASSWORD=lunch
+            - MYSQL_USER=lunch
+            - MYSQL_DATABASE=lunchinator
         ports:
-            - "33061:3306"
+            - "3306:3306"

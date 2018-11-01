@@ -15,9 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call([
-            UsersTableSeeder::class,
-            RestuarantsTableSeeder::class,
-            ReviewsTableSeeder::class,
+            UsersTableSeeder::class
         ]);
 
         $this->command->info('data seeded successfully!');
