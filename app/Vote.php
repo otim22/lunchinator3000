@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Ballot;
+use App\Voter;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -15,13 +16,27 @@ class Vote extends Model
      * @var array
      */
     protected $fillable = [
-        'restuarant_id', 'user_id', 'vote'
+        'ballot_id', 'restuarant_id', 'email'
     ];
 
-
+    /**
+     * A vote belongsTo ballot
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function ballot()
     {
-        return $this->hasMany(Ballot::class);
+        return $this->belongsTo(Ballot::class);
+    }
+
+    /**
+     * A vote hasOne voter
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function voter()
+    {
+        return $this->hasOne(Voter::class);
     }
 
 }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Restuarant;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,16 +21,6 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     protected $fillable = [
         'name', 'email',
     ];
-
-    /**
-     * A user belongsToMany restuarants
-     *
-     * @return Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function restuarant()
-    {
-        return $this->belongsToMany(Restuarant::class);
-    }
 
     /**
      * The attributes excluded from the model's JSON form.

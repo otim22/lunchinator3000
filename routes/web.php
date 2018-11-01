@@ -11,7 +11,11 @@
 |
 */
 
-$router->group(['prefix' => 'api/v1'], function () use ($router) {
+$router->get('/', function () use ($router) {
+    return "Welcome to lunchinator";
+});
+
+$router->group(['prefix' => 'api/'], function () use ($router) {
     
     // Accepts credentials and return a token for us
     $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
@@ -31,7 +35,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('/ballot/{id}', 'BallotController@show');
 
         $router->post('/vote', 'VoteController@show');
-
         
     });
 

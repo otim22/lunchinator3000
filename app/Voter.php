@@ -7,7 +7,7 @@ use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 
-class Ballot extends Model 
+class Voter extends Model 
 {
     /**
      * The attributes that are mass assignable.
@@ -15,18 +15,17 @@ class Ballot extends Model
      * @var array
      */
     protected $fillable = [
-        'ballot_id', 'endTime'
+        'name', 'email'
     ];
 
     /**
-     * A ballot hasMany votes
+     * A voter hasOne vote
      *
      * @return Illuminate\Database\Eloquent\Relations\Relation
      */
-
     public function vote()
     {
-        return $this->hasMany(Vote::class);
+        return $this->hasOne(Vote::class);
     }
 
 }

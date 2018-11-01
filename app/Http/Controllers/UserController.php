@@ -53,14 +53,14 @@ class UserController extends Controller
     /**
      * Get one user from the database
      *
-     * @param int $id id
+     * @param int $userId userId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function show($id)
+    protected function show($userId)
     {
         try {
-            $user = User::findOrFail($id);
+            $user = User::findOrFail($userId);
         } catch (\Exception $e){
             $user = null;
             $statusCode = 404;
@@ -78,14 +78,14 @@ class UserController extends Controller
      * Implement a full/partial update
      *
      * @param Request $request request
-     * @param int     $id  id
+     * @param int     $userId  userId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function update(Request $request, $id)
+    protected function update(Request $request, $userId)
     {
         try {
-            $user = self::userExist($id);
+            $user = self::userExist($userId);
             $user->update($request->only('name', 'password'));
         } catch (\Exception $e) {
             $user = null;
@@ -103,14 +103,14 @@ class UserController extends Controller
     /**
      * Delete a resource
      *
-     * @param int $id id
+     * @param int $userId userId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function delete($id)
+    protected function delete($userId)
     {
         try {
-            $user = self::userExist($id);
+            $user = self::userExist($userId);
             $user->delete();
         } catch(\Exception $e) {
             $user = null;

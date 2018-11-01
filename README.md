@@ -55,15 +55,15 @@ Now lets access our data on the terminal
 
 Using information of the seeded data into the database
 
-    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/v1/auth/login
+    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/auth/login
 
-    $ curl -X GET http://localhost:8000/api/v1/users
+    $ curl -X GET http://localhost:8000/api/users
 
 Using the token provided
     
-    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/v1/auth/login
+    $ curl -X POST -F 'email=some-name@gmail.com' -F 'password=admin' http://localhost:8000/api/auth/login
 
-    $ curl -X GET 'http://localhost:8000/api/v1/users?token=tokenFromFirstRequest'
+    $ curl -X GET 'http://localhost:8000/api/users?token=tokenFromFirstRequest'
 
 ## Run Unit Tests
 

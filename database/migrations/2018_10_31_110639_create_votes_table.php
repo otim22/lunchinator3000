@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRestuarantsTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateRestuarantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('restuarants', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->string('name');
-            $table->integer('wait_time_minutes');
-            $table->string('type');
-            $table->string('image');
-            $table->text('description');
+            $table->string('ballot_id');
+            $table->string('restuarant_id');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateRestuarantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restuarants');
+        Schema::dropIfExists('votes');
     }
 }
