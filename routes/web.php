@@ -12,23 +12,23 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "Welcome to lunchinator";
+    return "Welcome to lunchinator3000";
 });
 
 $router->group(['prefix' => 'api/'], function () use ($router) {
-    
-    // Accepts credentials and return a token for us
-    $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
-    $router->get('/users', 'UserController@index');
-    $router->post('/users', 'UserController@store');
-    $router->get('/users/{id}', 'UserController@show');
 
     $router->get('/ballot', 'BallotController@index');
     $router->post('/ballot', 'BallotController@store');
     $router->get('/ballot/{id}', 'BallotController@show');
 
     $router->post('/vote', 'VoteController@store');
+
     // $router->group(['middleware' => 'jwt_auth'], function () use ($router) {
+    // Accepts credentials and return a token for us
+    // $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
+    // $router->get('/users', 'UserController@index');
+    // $router->post('/users', 'UserController@store');
+    // $router->get('/users/{id}', 'UserController@show');
     // });
 
 });
