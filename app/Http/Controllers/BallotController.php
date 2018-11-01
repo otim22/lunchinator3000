@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Ballot;
+use App\Vote;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
 
 class BallotController extends Controller
 {
@@ -28,12 +33,17 @@ class BallotController extends Controller
      */
     protected function store(Request $request)
     {
-        $ballot = Ballot::create([
-            'ballot_id' => $request->ballot()->id,
-            'endTime' => $request->endTime
+        $data = $request->all();
+        $ballotId = $this->generateBallotId();
+        $endTime = Carbon::createFromFormat('d/mm/yy', $data['endTime']);
+        $ballot = DB::table('ballot')->insertGetId([
+            'ballot_id' => $ballotId,
+            'end_time' => $endTime
         ]);
 
-        return response()->json($ballot, 201);
+        DB::table('voters')->insert($this->mapVoters($data['voters']));
+
+        return response()->json($ballotId, 201);
     }
 
     /**
@@ -48,4 +58,26 @@ class BallotController extends Controller
         return response()->json($ballotId);
     }
 
+    /**
+     * Generates a GUID 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function generateBallotId() {
+        return (string) Str::uuid();
+    }
+
+    /**
+     * Return a collection of voters
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function mapVoters($voters) {
+        return collect($voters)->map(function($item, $key) {
+            return [
+                'name' => $item['name'],
+                'email' => $item['emailAddress']
+            ]
+        })->all();
+    }
 }

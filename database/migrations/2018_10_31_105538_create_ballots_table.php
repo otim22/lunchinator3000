@@ -16,7 +16,7 @@ class CreateBallotsTable extends Migration
         Schema::create('ballots', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ballot_id');
-            $table->time('endTime');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
