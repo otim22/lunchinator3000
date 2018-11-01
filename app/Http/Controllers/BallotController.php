@@ -31,7 +31,7 @@ class BallotController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function store(Request $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         $ballotId = $this->generateBallotId();
