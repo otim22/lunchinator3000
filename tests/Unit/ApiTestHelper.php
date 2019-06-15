@@ -14,7 +14,7 @@ class ApiTestHelper extends TestCase
 {
     use AuthTestAttachesJWT;
 
-    const API_BASE_URL = '/api/v1/';
+    const API_BASE_URL = 'api/';
 
     public function setUp()
     {

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\User;
-use Tests\Unit\ApiTestHelper;
+use \Tests\Unit\ApiTestHelper;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
@@ -20,7 +20,7 @@ class UserTest extends ApiTestHelper
      */
     public function testCanGetAllUsers()
     {
-        $response = $this->json('GET', 'api/v1/users');
+        $response = $this->json('GET', 'api/users');
         
         $response->assertStatus(200);
     }
